@@ -27,15 +27,8 @@ public class FindScriptLine {
 			String line = TextIO.getln(); //Read the next line
 			count++; //Count the lines.
 			
-			
-			//Check all the upper and lower case, especially mix case.
-			int n = word.length();
-			String wordLower = word.toLowerCase();
-			String wordUpper = word.toUpperCase();
-			String initialLetter = String.valueOf(wordUpper.charAt(0));
-			String otherLetter = wordLower.substring(1,n);
-			String newLine = initialLetter + otherLetter;
-			if (line.indexOf(word.toLowerCase()) >=0 || line.indexOf(word.toUpperCase()) >=0 || line.indexOf(newLine) >= 0) output = true;
+			String lineUpper = line.toUpperCase();
+			if (lineUpper.indexOf(word.toUpperCase()) >=0) output = true;
 			else output = false;
 			
 			//Skip all empty lines.
