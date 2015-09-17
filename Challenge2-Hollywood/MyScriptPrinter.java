@@ -23,7 +23,7 @@ public class MyScriptPrinter {
 		TextIO.readFile("thematrix.txt"); // stop reading from the keyboard- use the script
 
 		//TODO: Print the name here (see ScriptPrinter.txt example output for format)
-		TextIO.putln(name.toUpperCase()+"'s lines:");
+		TextIO.putln(nameUpperCase+"'s lines:");
 		
 		output = false; // initially don't print anything
 
