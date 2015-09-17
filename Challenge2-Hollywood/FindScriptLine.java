@@ -11,8 +11,6 @@ public class FindScriptLine {
 // TODO: Implement the functionality described in FindScriptLine.txt
 // TODO: Test your code manually and using the automated unit tests in FindScriptLineTest		
 		
-		boolean output = false;
-		
 		//Introduction
 		TextIO.putln("Please enter the word(s) to search for");
 		String word = TextIO.getln();
@@ -28,14 +26,7 @@ public class FindScriptLine {
 			count++; //Count the lines.
 			
 			String lineUpper = line.toUpperCase();
-			if (lineUpper.indexOf(word.toUpperCase()) >=0) output = true;
-			else output = false;
-			
-			//Skip all empty lines.
-			if (line.length() == 0) output = false;
-			
-			//Print the line.
-			if (output)
+			if (lineUpper.indexOf(word.toUpperCase()) >=0) 
 				TextIO.putln(count +" - "+line.trim());
 
 		}
