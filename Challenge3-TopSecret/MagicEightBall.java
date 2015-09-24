@@ -1,7 +1,7 @@
 //UIUC CS125 FALL 2014 MP. File: MagicEightBall.java, CS125 Project: Challenge3-TopSecret, Version: 2015-09-20T22:31:37-0500.575882357
  /**
  * TODO: add your netid to the line below.
- * @author put-your-netid-here
+ * @author qilezhi2
  */
 public class MagicEightBall {
 
@@ -31,17 +31,11 @@ public class MagicEightBall {
 		// An example (incorrect) if-else structure is shown below.
 		// However, you should use the above rules to construct your own
 		// solution.
-		if (Math.random() < 0.0001 || ! social ) {
-			TextIO.put("Rick Rolled Four Times in One Day");
-		} else {
-			if (Math.random() < 0.0001 || hours>0) {
-				TextIO.put("Delete Enter Keys Swapped");
-			} else if (Math.random() < 0.1) {
-				TextIO.put("Embarrassing Michigan Road Trip");
-			} else {
-				TextIO.put("Ace CS125 Exam");
-			}
-		}
+		
+		if (!happy && hours < 10 ) TextIO.putln("Embarrassing Michigan Road Trip");
+		else if (social && happy && hours > 10 ) TextIO.putln("Ace CS125 Exam");
+		else if (social && !happy && hours > 10 ) TextIO.putln("Rick Rolled Four Times in One Day");
+		else TextIO.put("Delete Enter Keys Swapped");
 
 	}
 

@@ -2,7 +2,7 @@
 /**
  * Prints sum of odd numbers in a specific format.
  * TODO: add your netid to the line below
- * @author put-your-netid-here
+ * @author qilezhi2
  */
 public class OddSum { 
 /**
@@ -18,6 +18,38 @@ Max?
 
  */
  public static void main(String[] args) { 
+	 
+	 // Enter a positive number.
+	 int num = TextIO.getlnInt(); 
+	 while (num<=0) num = TextIO.getlnInt();
+	 
+	 int sum = 1;
+	 int i;
+	 
+	 TextIO.putln("Max?");
+	 
+	 // Print the first line.
+	 String s1="1";
+	 
+	 for (i=3; i<=num; i+=2) {
+		 s1 += " + " + i;
+		 sum += i;
+	 }
+	 s1 += " = " + sum;
+	 TextIO.putln(s1);
+	 
+	 // Print the second line.
+	 String s2 = "";
+	 s2 += sum + " = ";
+	 
+	 if (num%2==0) num -= 1; // Find the biggest odd that is not bigger than num.
+	 
+	 for (int j=i-2; j>=3; j-=2) {
+		 s2 += j + " + ";
+	 }
+	 s2 += "1";
+	 TextIO.putln(s2);
 
   } // end of main method
+ 
 } // end of class 
