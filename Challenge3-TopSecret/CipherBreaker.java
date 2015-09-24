@@ -19,18 +19,18 @@ public class CipherBreaker {
 		for (int i=0; i<26; i++) { // Check 26 letters separately.
 			int countAlpha = 0;
 			char alpha = (char) ('A' + i);
-			for (int j=0; j<length; j++) {
+			for (int j=0; j<length; j++) { // Check each character in the line.
 				char c = line.charAt(j);
-				if (c==alpha) countAlpha++;
+				if (c==alpha) countAlpha++; // Count!
 			}
-			if (countAlpha != 0) TextIO.putln(alpha + ":" + countAlpha);
+			if (countAlpha != 0) TextIO.putln(alpha + ":" + countAlpha); // Print out the result of alphabet.
 		}
 		
 		int countNum = 0;
 		int countSpace = 0;
 		int countPunc = 0;
 		for (int j=0; j<length; j++) {
-			char c = line.charAt(j); // Read evry
+			char c = line.charAt(j); // Read every character in the line again.
 			if (c<='9' && c>='0') countNum++; // Count digits.
 			if (c == ' ') countSpace++; // Count spaces.
 			if (c == '"' || c == '-' || c == '\'' || c == '.' || c == '!' || c == ',') countPunc++; // Count punctuation.

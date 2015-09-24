@@ -29,10 +29,10 @@ Max?
 	 TextIO.putln("Max?");
 	 
 	 // Print the first line.
-	 String s1="1";
+	 String s1="1"; // starts with 1.
 	 
 	 for (i=3; i<=num; i+=2) {
-		 s1 += " + " + i;
+		 s1 += " + " + i; // add "+" and the next odd number.
 		 sum += i;
 	 }
 	 s1 += " = " + sum;
@@ -40,14 +40,14 @@ Max?
 	 
 	 // Print the second line.
 	 String s2 = "";
-	 s2 += sum + " = ";
+	 s2 += sum + " = "; // starts with the sum.
 	 
 	 if (num%2==0) num -= 1; // Find the biggest odd that is not bigger than num.
 	 
 	 for (int j=i-2; j>=3; j-=2) {
-		 s2 += j + " + ";
+		 s2 += j + " + "; // add the next odd number and "+".
 	 }
-	 s2 += "1";
+	 s2 += "1"; // add "1" in the end.
 	 TextIO.putln(s2);
 
   } // end of main method

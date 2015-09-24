@@ -25,6 +25,7 @@ public class CaesarCipher {
 			offset = TextIO.getlnInt();
 		}
 		
+		// Print out the decoding rule.
 		if (offset == 999 || offset == -999) TextIO.putln("Using position shift");
 		else TextIO.putln("Using shift value of " + offset);
 		
@@ -43,23 +44,19 @@ public class CaesarCipher {
 			s = s.toUpperCase(); // Change the line to upper case.
 			
 			String newS = "";
-			for (int i=0; i<length; i++) {
-				char c = s.charAt(i); // Get the element in the line.
+			for (int i=0; i<length; i++) { // Get every element in the line.
+				char c = s.charAt(i); // Get the element.
 				char newC = c;
 				if (c<'A' || c>'Z') newS += newC; // Punctuation and spaces are left unchanged.
 				
-				else {
+				else { // For letters,
 					
-					int j = i % 26;
+					int j = i % 26; // Make i between -25 and 25
 					
-					if (offset == 999) {
-						newC = (char) (c + j);
-					}
-					else if (offset == -999) {
-						newC = (char) (c - j);
-					}
+					if (offset == 999) newC = (char) (c + j); // Change the letter. (Position Shift)
+					else if (offset == -999) newC = (char) (c - j); // Change the letter. (Decode Position Shift)
 					
-					else newC = (char) (c + offset); // Change the letter.
+					else newC = (char) (c + offset); // Change the letter. (Normal)
 					
 					// Remain newC between 'A' and 'Z'.
 					while (newC<'A') {newC = (char) (newC + 26);}
@@ -70,7 +67,7 @@ public class CaesarCipher {
 				
 			}
 			
-			TextIO.putln("Processed:"+newS);
+			TextIO.putln("Processed:"+newS); // Print the new string.
 			
 		}
 		
