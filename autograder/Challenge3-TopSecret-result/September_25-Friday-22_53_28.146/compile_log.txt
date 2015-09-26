@@ -1,0 +1,2 @@
+    [javac] Compiling 18 source files to .
+    [javac] Compile failed; see the compiler error output for details.
