@@ -1,0 +1,11 @@
+Path: work/students/qilezhi2/Challenge3-TopSecret
+URL: https://subversion.ews.illinois.edu/svn/fa15-cs125/qilezhi2/Challenge3-TopSecret
+Repository Root: https://subversion.ews.illinois.edu/svn/fa15-cs125
+Repository UUID: 5f23604c-3434-47f8-97b3-c29fac847712
+Revision: 24727
+Node Kind: directory
+Schedule: normal
+Last Changed Author: qilezhi2
+Last Changed Rev: 18425
+Last Changed Date: 2015-09-24 15:01:07 -0500 (Thu, 24 Sep 2015)
+
