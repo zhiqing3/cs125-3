@@ -15,7 +15,7 @@ public class PlayListUtil {
 	public static void list(String[] list, int maximum) {
 		
 		int i;
-		if (maximum <= 0) maximum = list.length; // If maximum is -1, print out all elements.
+		if (maximum == -1) maximum = list.length; // If maximum is -1, print out all elements.
 		
 		for ( i = 0; i < maximum; i++) {
 			TextIO.putln("" + (i+1) + ". " + list[i]);

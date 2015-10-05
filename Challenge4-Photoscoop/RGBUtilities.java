@@ -18,7 +18,7 @@ public class RGBUtilities {
  * @param rgb the encoded color int
  * @return the red component (0..255)
  */
-	public static int toRed(int rgb) { // rgb = 0x XX XX XX in hexadecimal number
+	public static int toRed(int rgb) {
 		int red = (rgb/256/256) % 256; 
 		return red; // FIX ME
 	}

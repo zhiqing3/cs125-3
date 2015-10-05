@@ -5,7 +5,7 @@
  * 
  * Todo: Put your netid (i.e. username) in the line below
  * 
- * @author put-your-netid-here
+ * @author qilezhi2
  */
 public class Effects {
 	/**

@@ -10,7 +10,6 @@ public class PixelEffects {
 
 	/* The representation of array: array[width][height]
 	
-	
 	/** Copies the source image to a new 2D integer image */
 	public static int[][] copy(int[][] source) {
 		// Create a NEW 2D integer array and copy the colors across
@@ -26,6 +25,7 @@ public class PixelEffects {
 
 		return result; // Fix Me
 	}
+	
 	
 	/**
 	 * Resize the array image to the new width and height
@@ -57,13 +57,15 @@ public class PixelEffects {
 		// For example if you're setting a pixel halfway across the image, you should be reading half way across the original image too.
 	}
 
+	
 	/**
 	 * Half the size of the image. This method should be just one line! Just
 	 * delegate the work to resize()!
 	 */
 	public static int[][] half(int[][] source) {
-		return resize(source, source.length / 2, source[0].length / 2);// Fix Me
+		return resize(source, source.length / 2, source[0].length / 2); // Fix Me
 	}
+	
 	
 	/**
 	 * Create a new image array that is the same dimensions of the reference
@@ -79,6 +81,7 @@ public class PixelEffects {
 		return resize(source, reference.length, reference[0].length); // Fix Me
 	}
 
+	
 	/** Flip the image vertically */
 	public static int[][] flip(int[][] source) {
 		
@@ -93,6 +96,7 @@ public class PixelEffects {
 		return result;// Fix Me
 	}
 
+	
 	/** Reverse the image horizontally */
 	public static int[][] mirror(int[][] source) {
 		
@@ -107,6 +111,7 @@ public class PixelEffects {
 		return result;// Fix Me
 	}
 
+	
 	/** Rotate the image */
 	public static int[][] rotateLeft(int[][] source) {
 		
@@ -138,12 +143,9 @@ public class PixelEffects {
 				// Get color for every element.
 				int rgbA = sourceA[i][j];
 				int rgbB = sourceB[i][j];
-				int red = RGBUtilities.toRed(rgbA) + RGBUtilities.toRed(rgbB);
-				if (red > 255) red = 255;
-				int green = RGBUtilities.toGreen(rgbA) + RGBUtilities.toGreen(rgbB);
-				if (green > 255) green = 255;
-				int blue = RGBUtilities.toBlue(rgbA) + RGBUtilities.toBlue(rgbB);
-				if (blue > 255) blue = 255;
+				int red = (RGBUtilities.toRed(rgbA) + RGBUtilities.toRed(rgbB))/2; // Merge the color by calculating the average.
+				int green = (RGBUtilities.toGreen(rgbA) + RGBUtilities.toGreen(rgbB))/2;
+				int blue = (RGBUtilities.toBlue(rgbA) + RGBUtilities.toBlue(rgbB))/2;
 				
 				result[i][j] = RGBUtilities.toRGB(red, green, blue); // Copy the color.
 			}
@@ -178,9 +180,7 @@ public class PixelEffects {
 				int green1 = RGBUtilities.toGreen(rgb1);
 				int blue1 = RGBUtilities.toBlue(rgb1);
 				
-				if (red > 4 * Math.max(green, blue) && red > 64) red = green = blue = 0; // Redeye
-				
-				if (green > Math.max(green, red)) result[i][j] = RGBUtilities.toRGB(red1, green1, blue1);
+				if (green >= 2*(blue+red)) result[i][j] = RGBUtilities.toRGB(red1, green1, blue1);
 				else result[i][j] = RGBUtilities.toRGB(red, green, blue); // Copy the color.
 			}
 		}
@@ -214,6 +214,31 @@ public class PixelEffects {
 		
 		// Does not ask for any user input and returns a new 2D array
 		// Todo: remove this return null
-		return null;
+		
+		int width = source.length, height = source[0].length;
+		int[][] result = new int[width][height];
+		
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				
+				// Get color for every element.
+				int rgbA = source[i][j];
+				int redA = RGBUtilities.toRed(rgbA);
+				int greenA = RGBUtilities.toGreen(rgbA);
+				int blueA = RGBUtilities.toBlue(rgbA);
+				
+				int rgbB = sourceB[i][j];
+				int redB = RGBUtilities.toRed(rgbB);
+				int greenB = RGBUtilities.toGreen(rgbB);
+				int blueB = RGBUtilities.toBlue(rgbB);
+				
+				int red = (int) ((double)redA + (double)1/j*(redB-redA));
+				int green = (int) ((double)greenA + (double)1/j*(greenB-greenA));
+				int blue = (int) ((double)blueA + (double)1/j*(blueB-blueA));
+				result[i][j] = RGBUtilities.toRGB(red, green, blue); // Copy the color.
+		
+			}
+		}
+		return result;
 	}
 }
