@@ -13,7 +13,7 @@ public class RainGame {
 		int x=0, y=0, dx=0, dy=0, score = 0, count = 0;
 		int color;
 		String text = "";
-		long startTime = System.currentTimeMillis(); 
+		long startTime = System.currentTimeMillis(); // Set start time.
 
 		Zen.setFont("Helvetica-32");
 		
@@ -40,13 +40,19 @@ public class RainGame {
 				
 			Zen.setColor(255, 255, 200);
 			Zen.fillRect(0, 0, Zen.getZenWidth(), Zen.getZenHeight());
+			
+			// Visual distraction.
+			for (int j=5; j<count; j++) { // The number of visual distraction is based on level of difficulty.
+				Zen.setColor((int)(Math.random()*255), (int)(Math.random()*255), (int)(Math.random()*255)); // the color is random.
+				Zen.fillRect((int)(Math.random()*Zen.getZenWidth()),(int)(Math.random()*Zen.getZenHeight()),(int)(Math.random()*10+5),(int)(Math.random()*10+5));
+			}
 
 			color = 10 * count;
 			if (color > 200) color = 200;
-			
 			Zen.setColor(color, color, color); // The color is lighter when count becomes bigger. 
 			Zen.drawText(text, x, y);
 			
+			Zen.setColor(0, 0, 0);
 			Zen.drawText("Level: "+count,10,40);
 			Zen.drawText("Score: "+score,10,80);
 			Zen.drawText("Enter \"s\" to skip the easiest level.",10,450);
