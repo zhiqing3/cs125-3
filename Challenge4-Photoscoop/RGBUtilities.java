@@ -18,15 +18,6 @@ public class RGBUtilities {
  * @param rgb the encoded color int
  * @return the red component (0..255)
  */
-	
-	public static void main(String[] args) {
-		
-		String a=("01234567");
-		int i = a.indexOf("3");
-		int j=a.length();
-		TextIO.putln(a.substring(i+1,j));
-		
-	}
 	public static int toRed(int rgb) {
 		int red = (rgb >> 16) & 0xff; 
 		return red; // FIX ME
