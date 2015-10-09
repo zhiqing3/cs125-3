@@ -18,18 +18,27 @@ public class RGBUtilities {
  * @param rgb the encoded color int
  * @return the red component (0..255)
  */
+	
+	public static void main(String[] args) {
+		
+		String a=("01234567");
+		int i = a.indexOf("3");
+		int j=a.length();
+		TextIO.putln(a.substring(i+1,j));
+		
+	}
 	public static int toRed(int rgb) {
-		int red = (rgb/256/256) % 256; 
+		int red = (rgb >> 16) & 0xff; 
 		return red; // FIX ME
 	}
 
 	public static int toGreen(int rgb) {
-		int green = (rgb/256) % 256;
+		int green = (rgb >> 8) & 0xff;
 		return green; // FIX ME
 	}
 
 	public static int toBlue(int rgb) {
-		int blue = rgb % 256;
+		int blue = (rgb) & 0xff;
 		return blue; // FIX ME
 	}
 
@@ -41,7 +50,8 @@ public class RGBUtilities {
 	 * @return a single integer representation the rgb color (8 bits per component) rrggbb
 	 */
 	static int toRGB(int r, int g, int b) {
-		return r*256*256 + g*256 + b; // FIX THIS
+		int rgb = ( r << 16 | g << 8 | b);
+		return rgb; // FIX THIS
 	}
 
 }

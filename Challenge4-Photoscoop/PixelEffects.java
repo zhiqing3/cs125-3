@@ -40,15 +40,14 @@ public class PixelEffects {
 		
 		int width = source.length, height = source[0].length;
 		int[][] result = new int[newWidth][newHeight]; // Create a new 2D array.
-		double k = (double) newWidth / width; // Relative proportion
+		double kW = ((double) newWidth) / width; // Relative proportion of width
+		double kH = ((double) newHeight) / height; // Relative proportion of height
 		
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				
-				for (int a = (int) (k*i); a < (int) (k*(i+1)); a++) {
-					for (int b = (int) (k*j); b < (int) (k*(j+1)); b++) 
-						result[a][b] = source[i][j]; // Copy the pointers.
-				}
+		for (int i = 0; i < newWidth; i++) {
+			for (int j = 0; j < newHeight; j++) {
+				int a = (int) (i/kW);
+				int b = (int) (j/kH);
+				result[i][j] = source[a][b]; // Copy the pointers.
 			}
 		}
 		return result; // Fix Me
@@ -175,17 +174,16 @@ public class PixelEffects {
 				int green = RGBUtilities.toGreen(rgb);
 				int blue = RGBUtilities.toBlue(rgb);
 				
-				int rgb1 = backImage[i][j];
-				int red1 = RGBUtilities.toRed(rgb1);
-				int green1 = RGBUtilities.toGreen(rgb1);
-				int blue1 = RGBUtilities.toBlue(rgb1);
+				int rgbB = backImage[i][j];
+				int redB = RGBUtilities.toRed(rgbB);
+				int greenB = RGBUtilities.toGreen(rgbB);
+				int blueB = RGBUtilities.toBlue(rgbB);
 				
-				if (green >= 2*(blue+red)) result[i][j] = RGBUtilities.toRGB(red1, green1, blue1);
-				else result[i][j] = RGBUtilities.toRGB(red, green, blue); // Copy the color.
+				if (green > Math.max(blue,red)) result[i][j] = RGBUtilities.toRGB(redB, greenB, blueB); // Replace the green area
 			}
 		}
 		
-		return foreImage;
+		return result;
 	}
 
 	/** Removes "redeye" caused by a camera flash. sourceB is not used */
@@ -216,6 +214,7 @@ public class PixelEffects {
 		// Todo: remove this return null
 		
 		int width = source.length, height = source[0].length;
+		int[][] sourceBNew = resize(source, width, height);
 		int[][] result = new int[width][height];
 		
 		for (int i = 0; i < width; i++) {
@@ -227,15 +226,15 @@ public class PixelEffects {
 				int greenA = RGBUtilities.toGreen(rgbA);
 				int blueA = RGBUtilities.toBlue(rgbA);
 				
-				int rgbB = sourceB[i][j];
+				int rgbB = sourceBNew[i][j];
 				int redB = RGBUtilities.toRed(rgbB);
 				int greenB = RGBUtilities.toGreen(rgbB);
 				int blueB = RGBUtilities.toBlue(rgbB);
 				
-				int red = (int) ((double)redA + (double)1/j*(redB-redA));
-				int green = (int) ((double)greenA + (double)1/j*(greenB-greenA));
-				int blue = (int) ((double)blueA + (double)1/j*(blueB-blueA));
-				result[i][j] = RGBUtilities.toRGB(red, green, blue); // Copy the color.
+				int red = (int) ((double)redA + (double)j/height*(redB-redA));
+				int green = (int) ((double)greenA + (double)j/height*(greenB-greenA));
+				int blue = (int) ((double)blueA + (double)j/height*(blueB-blueA));
+				result[i][j] = RGBUtilities.toRGB(red, green, blue); // Gradually change the color from a to b.
 		
 			}
 		}
