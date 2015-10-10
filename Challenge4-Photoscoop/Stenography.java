@@ -24,7 +24,7 @@
  * 
  * TL;DR good.
  * 
- * @author angrave
+ * @author qilezhi2
  *
  */
 public class Stenography {
@@ -42,6 +42,7 @@ public class Stenography {
 		int width = mainImage.length, height = mainImage[0].length;
 		int[][] resizedSecret = PixelEffects.resize(secretImage, mainImage);
 		int[][] result = new int[width][height];
+		
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				int secretRGB = resizedSecret[i][j]; 
@@ -55,9 +56,9 @@ public class Stenography {
 				int green = RGBUtilities.toGreen(rgb);
 				int blue = RGBUtilities.toBlue(rgb);
 				
-				red = (red & 0xf0) | (sRed >>4);
-				blue = (blue & 0xf0) | (sBlue >>4);
-				green =(green & 0xf0) | (sGreen >>4);
+				red = (red & 0xf0) | (sRed >> 4);
+				blue = (blue & 0xf0) | (sBlue >> 4);
+				green = (green & 0xf0) | (sGreen >> 4);
 				result[i][j] = RGBUtilities.toRGB(red, green, blue);
 			}
 		}
@@ -68,6 +69,22 @@ public class Stenography {
 		int width = source.length, height = source[0].length;
 
 		int[][] result = new int[width][height];
+		
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				
+				// main decoy image should be something unremarkable
+				int rgb = source[i][j]; 
+				int red = RGBUtilities.toRed(rgb);
+				int green = RGBUtilities.toGreen(rgb);
+				int blue = RGBUtilities.toBlue(rgb);
+				
+				int redN = (red & 0x00) | (red << 4);
+				int blueN = (blue & 0x00) | (blue << 4);
+				int greenN = (green & 0x00) | (green << 4);
+				result[i][j] = RGBUtilities.toRGB(redN, greenN, blueN);
+			}
+		}
 		
 		/* REDACTED */
 		
