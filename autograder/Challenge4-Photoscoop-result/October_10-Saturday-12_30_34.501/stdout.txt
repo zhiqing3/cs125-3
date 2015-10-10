@@ -1,0 +1,16 @@
+................Todo: Implement Effects.process(half)
+Todo: Implement Effects.process(rotate)
+Todo: Implement Effects.process(flip)
+Todo: Implement Effects.process(mirror)
+Todo: Implement Effects.process(redeye)
+Todo: Implement Effects.process(funky)
+Todo: Implement Effects.process(resize)
+Todo: Implement Effects.process(merge)
+Todo: Implement Effects.process(key)
+......
+Time: 0.028
+
+OK (22 tests)
+
+22 passed out of 22
+Score=100

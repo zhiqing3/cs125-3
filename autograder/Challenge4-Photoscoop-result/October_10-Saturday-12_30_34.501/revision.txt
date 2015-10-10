@@ -1,0 +1,11 @@
+Path: work/students/qilezhi2/Challenge4-Photoscoop
+URL: https://subversion.ews.illinois.edu/svn/fa15-cs125/qilezhi2/Challenge4-Photoscoop
+Repository Root: https://subversion.ews.illinois.edu/svn/fa15-cs125
+Repository UUID: 5f23604c-3434-47f8-97b3-c29fac847712
+Revision: 29572
+Node Kind: directory
+Schedule: normal
+Last Changed Author: qilezhi2
+Last Changed Rev: 29064
+Last Changed Date: 2015-10-08 23:12:36 -0500 (Thu, 08 Oct 2015)
+
