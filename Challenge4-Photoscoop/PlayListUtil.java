@@ -12,6 +12,16 @@ public class PlayListUtil {
 	 * @param list
 	 * @param maximum
 	 */
+	public static void main(String[] arg) {
+		int[] a = {0,1,2,3};
+		int[] b = aa(a);
+		System.out.print(b);
+	}
+	public static int[] aa(int[] source) {
+		int[] c = source;
+		c[0]=10;
+		return c;
+	}
 	public static void list(String[] list, int maximum) {
 		
 		int i;
