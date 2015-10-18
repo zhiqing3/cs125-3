@@ -26,4 +26,37 @@
  * 
  */
 class Geocache {
+	
+	private double x;
+	private double y;
+	private int id;
+	
+	private static int count=0;
+	
+	public Geocache(double i, double j) {
+		this.x=i;
+		this.y=j;
+		this.id=count;
+		count++;
+	}
+	public Geocache(Geocache source) {
+		this.x=source.x;
+		this.y=source.y;
+		this.id=source.id;
+		count++;
+	}
+	
+	public static void resetCount() {count=0;}
+	
+	public static int getNumGeocachesCreated() {return count;}
+	
+	public boolean equals(Geocache source) {return source instanceof Geocache;}
+	
+	public String toString(Geocache source) {return "("+source.x+","+source.y+")";}
+	
+	public void setX(double a) {if ( a<1000 && a>-1000 ) this.x=a;}
+	public void setY(double a) {this.y=a;}
+	public double getX() {return this.x;}
+	public double getY() {return this.y;}
+	public int getId() {return this.id;}
 }
