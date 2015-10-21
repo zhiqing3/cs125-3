@@ -31,7 +31,7 @@ class Geocache {
 	private double y;
 	private int id;
 	
-	private static int count=0;
+	private static int count;
 	
 	public Geocache(double i, double j) {
 		this.x=i;
@@ -42,7 +42,7 @@ class Geocache {
 	public Geocache(Geocache source) {
 		this.x=source.x;
 		this.y=source.y;
-		this.id=source.id;
+		this.id=count;
 		count++;
 	}
 	
@@ -50,9 +50,15 @@ class Geocache {
 	
 	public static int getNumGeocachesCreated() {return count;}
 	
-	public boolean equals(Geocache source) {return source instanceof Geocache;}
+	public boolean equals(Object source) {
+		if (source instanceof Geocache) {
+			Geocache a = (Geocache)source;
+			return this.x==a.x && this.y==a.y;
+		}
+		return false;
+	}
 	
-	public String toString(Geocache source) {return "("+source.x+","+source.y+")";}
+	public String toString() {return "("+this.x+","+this.y+")";}
 	
 	public void setX(double a) {if ( a<1000 && a>-1000 ) this.x=a;}
 	public void setY(double a) {this.y=a;}
