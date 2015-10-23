@@ -4,41 +4,52 @@
  * There are several errors in the code below
  *
  * Hint: Get the Geocache class working and passing its tests first.
+ * 
+ * @author qilezhi2
+ * 
  */
 public class GeocacheList {
 	private Geocache[] data = new Geocache[0];
 	private int size = 0;
 
 	public Geocache getGeocache(int i) {
-		return null;
+		return this.data[i]; // return the i-th elements in the array
 	}
 
 	public int getSize() {
-		return 0;
+		return this.size;
 	}
 
 	public GeocacheList() {
 	}
 
 	public GeocacheList(GeocacheList other, boolean deepCopy) {
-		data = new Geocache[other.data.length];
-		size = other.size;
-		
+		this.size = other.size;
+		if (deepCopy) { // deep copy
+			this.data = new Geocache[other.data.length];
+			for (int i=0; i<this.data.length; i++) this.data[i]=new Geocache(other.data[i]);
+		}
+		else {  // shallow copy
+			this.data=other.data;
+		}
 	}
 
 	public void add(Geocache p) {
-		size++;
-		if (size > data.length) {
-			Geocache[] old = data;
-			data = new Geocache[size * 2];
-			for (int i = 0; i < old.length; i++)
-				data[i] = old[i];
+		this.size++;
+		if (this.size > this.data.length) {
+			Geocache[] old = this.data;
+			this.data = new Geocache[this.size];
+			for (int i = 0; i < this.size-1; i++) this.data[i] = old[i];
 		}
-		data[size-1] = p;
+		this.data[this.size-1] = p;
 	}
 
 	public Geocache removeFromTop() {
-		return null;
+		this.size--;
+		Geocache[] old = this.data;
+		this.data = new Geocache[this.size];
+		for (int i = 0; i < this.size; i++) this.data[i] = old[i+1];
+		return old[0];
 	}
 
 	public String toString() {
@@ -49,4 +60,5 @@ public class GeocacheList {
 			s.append(data[i]);
 		}
 		return s.toString();
-}	}
+	}	
+}
