@@ -9,11 +9,26 @@
  * description:a*b=M 
  *   where a,b, and M are replaced with the numerical values of a, b and the multiplication of a and b.
  * Your code will create a SimplePublicTriple, initializes the three fields and return a reference to the SimplePublicTriple object.
- *
+ * 
+ * @author qilezhi2
+ * 
  */
 public class UsingPublicFieldsIsEasy {
 	
 	public static SimplePublicTriple analyze(SimplePublicPair in) {
-		
+		SimplePublicTriple result = new SimplePublicTriple();
+		int min, max;
+		if (in.a > in.b) {
+			min=in.b;
+			max=in.a;
+		}
+		else {
+			min=in.a;
+			max=in.b;
+		}
+		result.x = min;
+		result.y = max;
+		result.description = "" + in.a + "*" + in.b + "=" + in.a*in.b;
+		return result;
 	}
 }

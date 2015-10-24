@@ -41,20 +41,20 @@ class Geocache {
 		this.x=newX;
 		this.y=newY;
 		this.id=count;
-		count++; // increment the count value
+		count++; // Increment the count value
 	}
 	public Geocache(Geocache source) {
 		this.x=source.x;
 		this.y=source.y;
 		this.id=count;
-		count++; // increment the count value
+		count++; // Increment the count value
 	}
 	
-	// returns the number of geocaches created since resetCount() method was called.
+	// Return the number of geocaches created since resetCount() method was called.
 	public static void resetCount() {count=0;}
 	public static int getNumGeocachesCreated() {return count;}
 	
-	// returns true if the given object equals this object
+	// Return true if the given object equals this object
 	public boolean equals(Object source) {
 		if (source instanceof Geocache) {
 			Geocache a = (Geocache)source;
@@ -63,10 +63,11 @@ class Geocache {
 		return false;
 	}
 	
-	// returns a string representation of this object in the form '(x,y)' where 'x' and 'y' * are the current values of x,y.
+	// Return a string representation of this object in the form '(x,y)'
 	public String toString() {return "("+this.x+","+this.y+")";}
 	
-	public void setX(double a) {if ( a<1000 && a>-1000 ) this.x=a;} // the setX() method will only change the Geocache's x value
+	// Accessor methods
+	public void setX(double a) {if ( a<1000 && a>-1000 ) this.x=a;} // The setX() method will only change the Geocache's x value
 																	// if the given value is between -1000 and 1000 exclusive
 	public void setY(double a) {this.y=a;}
 	public double getX() {return this.x;}

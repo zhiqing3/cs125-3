@@ -26,15 +26,15 @@ public class KeyValueMap { // aka Dictionary or Map
 		
 		// If the key doesn't exist
 		if (! doesExist) {
-			String[] keyOld = this.keyArray;
+			String[] keyOld = this.keyArray; // Copy the original arrays
 			Color[] valueOld = this.valueArray;
-			this.keyArray = new String[keyOld.length+1]; // create new arrays
+			this.keyArray = new String[keyOld.length+1]; // Create new arrays
 			this.valueArray = new Color[valueOld.length+1];
 			for (int i = 0; i < this.keyArray.length-1; i++) {
 				this.keyArray[i] = keyOld[i];
 				this.valueArray[i] = valueOld[i];
 			}
-			this.keyArray[this.keyArray.length-1] = key.toUpperCase();
+			this.keyArray[this.keyArray.length-1] = key.toUpperCase(); // Add new element.
 			this.valueArray[this.keyArray.length-1] = value;
 		}
 	}
@@ -46,7 +46,7 @@ public class KeyValueMap { // aka Dictionary or Map
 		for (int i=0; i<this.keyArray.length; i++) {
 			if (this.keyArray[i].equalsIgnoreCase(key)) return this.valueArray[i]; 
 		}
-		return null;
+		return null; // If no key are founded, return null.
 	}
 
 	/**
@@ -66,17 +66,18 @@ public class KeyValueMap { // aka Dictionary or Map
 	 */
 	public void remove(String key) {
 		for (int i=0; i<this.keyArray.length; i++) {
-			if (this.keyArray[i].equalsIgnoreCase(key)) { // find key at the i-th position
+			if (this.keyArray[i].equalsIgnoreCase(key)) { // Find key at the i-th position
 				String[] keyOld = this.keyArray;
 				Color[] valueOld = this.valueArray;
-				this.keyArray = new String[keyOld.length-1]; // create new arrays
+				this.keyArray = new String[keyOld.length-1]; // Create new arrays
 				this.valueArray = new Color[valueOld.length-1];
 				
+				// Copy the elements before the removed one.
 				for (int j = 0; j < i; j++) {
 					this.keyArray[j] = keyOld[j];
 					this.valueArray[j] = valueOld[j];
 				}
-				
+				// Copy the elements after the removed one.
 				for (int j = i; j < this.keyArray.length; j++) {
 					this.keyArray[j] = keyOld[j+1];
 					this.valueArray[j] = valueOld[j+1];

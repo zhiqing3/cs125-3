@@ -13,24 +13,24 @@ public class GeocacheList {
 	private int size = 0;
 
 	public Geocache getGeocache(int i) {
-		return this.data[i]; // return the i-th elements in the array
+		return this.data[i]; // Return the i-th element of the array
 	}
 
 	public int getSize() {
 		return this.size;
 	}
 
-	public GeocacheList() {
+	public GeocacheList() { // Default constructor.
 	}
 
 	public GeocacheList(GeocacheList other, boolean deepCopy) {
 		this.size = other.size;
-		if (deepCopy) { // deep copy
-			this.data = new Geocache[other.data.length];
+		this.data = new Geocache[other.data.length];
+		if (deepCopy) { // Deep copy
 			for (int i=0; i<this.data.length; i++) this.data[i]=new Geocache(other.data[i]);
 		}
-		else {  // shallow copy
-			this.data=other.data;
+		else {  // Shallow copy
+			for (int i=0; i<this.data.length; i++) this.data[i]=other.getGeocache(i);
 		}
 	}
 
@@ -39,17 +39,17 @@ public class GeocacheList {
 		if (this.size > this.data.length) {
 			Geocache[] old = this.data;
 			this.data = new Geocache[this.size];
-			for (int i = 0; i < this.size-1; i++) this.data[i] = old[i];
+			for (int i = 0; i < this.size-1; i++) this.data[i] = old[i]; // Copy all elements.
 		}
-		this.data[this.size-1] = p;
+		this.data[this.size-1] = p; // Add the new one.
 	}
 
 	public Geocache removeFromTop() {
 		this.size--;
 		Geocache[] old = this.data;
 		this.data = new Geocache[this.size];
-		for (int i = 0; i < this.size; i++) this.data[i] = old[i+1];
-		return old[0];
+		for (int i = 0; i < this.size; i++) this.data[i] = old[i+1]; // Copy all elements.
+		return old[0]; // Return the removed one.
 	}
 
 	public String toString() {

@@ -4,38 +4,45 @@
 */
 
 public class Queue {
-	private double[] queue = new double[0];
+	private double[] array = new double[0];
 	
 	/** Adds the value to the front of the queue.
 	 * Note the queue automatically resizes as more items are added. */
 	public void add(double value) {
-		double[] old=queue;
-		queue[0]=value;
-		for (int i=1; i<queue.length+1; i++) queue[i]=old[i=1];
+		double[] old = this.array;
+		this.array = new double[old.length+1];
+		this.array[0]= value; // Add the value to the front.
+		for (int i=0; i<old.length; i++) this.array[i+1]=old[i];
 	}
 	
 	/** Removes the value from the end of the queue. If the queue is empty, returns 0 */
 	public double remove() {
-		if (queue.length==0) return 0;
+		if (this.isEmpty()) return 0;
 		else {
-			double result=queue[queue.length-1];
-			queue[queue.length-1]=0;
+			double[] old = this.array;
+			double result=this.array[old.length-1]; // The returned value is the last item of the array.
+			this.array = new double[old.length-1];
+			for (int i=0; i<old.length-1; i++) this.array[i]=old[i];
 			return result;
 		}
 	}
 	
 	/** Returns the number of items in the queue. */
 	public int length() {
-		throw new RuntimeException("I am not a number; I am free man.");		
+		return this.array.length;		
 	}
 	
 	/** Returns true iff the queue is empty */
 	public boolean isEmpty() {
-		throw new RuntimeException("The butler did it");
+		return this.array.length==0;
 	}
 	
 	/** Returns a comma separated string representation of the queue. */
 	public String toString() {
-		throw new RuntimeException("Daisy daisy daisy");
+		String s = "";
+		// Reverse the order.
+		for (int i=this.array.length-1; i>0; i--) s += this.array[i]+",";
+		s += this.array[0];
+		return s;
 	}
 }

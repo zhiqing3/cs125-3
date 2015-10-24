@@ -20,7 +20,7 @@ public class StaticMethodsAreEasy {
 		if (num<0) return (new Geocache[0]);
 		else {
 			Geocache[] result = new Geocache[num];
-			for (int i=0; i<num; i++) result[i]=new Geocache(Math.random()*10000,Math.random()*10000); // create new objects
+			for (int i=0; i<num; i++) result[i]=new Geocache(Math.random()*10000,Math.random()*10000); // Create new objects
 			return result;
 		}
 	}
@@ -39,7 +39,7 @@ public class StaticMethodsAreEasy {
 	public static int ensureMinimumXValue(Geocache[] source, double minX) {
 		int count=0;
 		for (int i=0; i<source.length; i++) {
-			// using accessor methods to access private instance variable x
+			// Use accessor methods to access private instance variable x
 			if (source[i].getX()<minX) { 
 				source[i].setX(minX);
 				count++;
@@ -61,7 +61,7 @@ public class StaticMethodsAreEasy {
 	public static int countEqual(Geocache[] sourceArray, Geocache source) {
 		int count=0;
 		for (int i=0; i<sourceArray.length; i++) {
-			// using equals()
+			// Use equals()
 			if (sourceArray[i].equals(source)) count++;
 		}
 		return count;
