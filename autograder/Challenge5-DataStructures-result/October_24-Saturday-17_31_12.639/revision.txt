@@ -1,0 +1,11 @@
+Path: work/students/qilezhi2/Challenge5-DataStructures
+URL: https://subversion.ews.illinois.edu/svn/fa15-cs125/qilezhi2/Challenge5-DataStructures
+Repository Root: https://subversion.ews.illinois.edu/svn/fa15-cs125
+Repository UUID: 5f23604c-3434-47f8-97b3-c29fac847712
+Revision: 37695
+Node Kind: directory
+Schedule: normal
+Last Changed Author: qilezhi2
+Last Changed Rev: 37172
+Last Changed Date: 2015-10-23 20:55:37 -0500 (Fri, 23 Oct 2015)
+
