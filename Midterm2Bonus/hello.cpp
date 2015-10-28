@@ -14,9 +14,12 @@ int main()
  
   // endl stands for 'end line'
 
-   for(int i=0; i<10; i++) {
-     cout << i*i;
-     cout << endl;
+   for(int i=0; i<16; i++) {
+	for(int j=0; j<16; j++){
+    	 cout << i*j;
+    	 cout << "  ";
+	}
+	cout << endl;
    }
    return 0;
 }
