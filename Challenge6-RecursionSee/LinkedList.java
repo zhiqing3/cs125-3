@@ -128,7 +128,7 @@ public class LinkedList {
 	 * to compare strings.
 	 * 
 	 * @param word
-	 * @return true if the linked list contains the word (case sensivitive)
+	 * @return true if the linked list contains the word (case sensitive)
 	 */
 	public boolean contains(String word) {
 		if (this.next==null) return this.word.equals(word);
@@ -174,18 +174,20 @@ public class LinkedList {
 		}
 	}
 
-	private static String[] hidden = new String[0]; // 
+	private static String[] hidden = new String[0]; // If the input is less than the first word, the input is "hidden".
 	public LinkedList insert(String word) {
 		if (word.compareToIgnoreCase(this.word)<0) {
 			LinkedList temp = new LinkedList(word, this);
+			// Append the array hidden to the end of the LinkedList
 			for (int j=0; j<hidden.length; j++) {
-				temp.append(hidden[j]);
+				temp.append(hidden[j]); 
 			}
 			return temp;
 		}
 		else if (word.compareToIgnoreCase(this.word)>0) {
 			String[] old = hidden;
 			hidden = new String[old.length+1];
+			// Sort the array.
 			int i=0;
 			for (int j=0; j<old.length; j++) {
 				if (word.compareToIgnoreCase(old[j])>0) i=j+1;
