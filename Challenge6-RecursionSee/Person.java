@@ -60,34 +60,63 @@ public void print()
 
 public int count() // total person count including this object
 {
-	if (this.child1!=null && this.child2!=null ) return 1+this.child1.count()+this.child2.count();
+	if (this.child1!=null && this.child2!=null) return 1+this.child1.count()+this.child2.count();
 	else if (this.child1!=null) return 1+this.child1.count();
 	else if (this.child2!=null) return 1+this.child2.count();
 	else return 1;
 }
 public int countGrandChildren() // but not greatGrandChildren
 {
-	//YOUR CODE HERE
-	throw new IllegalArgumentException("Not Yet Implemented");
+	int count=0;
+	if (this.child1!=null) {
+		if (this.child1.child1!=null) count++; 
+		if (this.child1.child2!=null) count++;
+	}
+	if (this.child2!=null) {
+		if (this.child2.child1!=null) count++; 
+		if (this.child2.child2!=null) count++;
+	}
+	return count;
 }
 
 public int countMaxGenerations()
 {
-	//YOUR CODE HERE
-	throw new IllegalArgumentException("Not Yet Implemented");   
+	if (this.child1!=null && this.child2!=null) return 1
+			+ Math.max(this.child1.countMaxGenerations(),this.child2.countMaxGenerations());
+	else if (this.child1!=null) return 1+this.child1.countMaxGenerations();
+	else if (this.child2!=null) return 1+this.child2.countMaxGenerations();
+	else return 1;  
 }
 
 public int countGender(char gen)
 {
-	//YOUR CODE HERE
-	throw new IllegalArgumentException("Not Yet Implemented");
+	int result=0;
+	// Count the gender for its offsprings.
+	if (this.child1!=null && this.child2!=null) result = this.child1.countGender(gen)+this.child2.countGender(gen);
+	else if (this.child1!=null) result = this.child1.countGender(gen);
+	else if (this.child2!=null) result = this.child2.countGender(gen);
+	else result = 0;
+	if (this.gender==gen) result++; // If the person is that gender,
+	return result; // If not,
 }
 
 
 public Person search(String name, int maxGeneration)
 {
-	//YOUR CODE HERE
-	throw new IllegalArgumentException("Not Yet Implemented");
+	if (maxGeneration<=0) return null;
+	else {
+		if (this.name.equals(name)) return this; // If the person's name equals to that string, we are done.
+		else {
+			if (this.child1!=null && this.child2!=null) {
+				if (this.child1.search(name, maxGeneration-1)!=null) return this.child1.search(name, maxGeneration-1);
+				if (this.child2.search(name, maxGeneration-1)!=null) return this.child2.search(name, maxGeneration-1);
+				else return null; // If nothing is found, return null.
+			}
+			else if (this.child1!=null) return this.child1.search(name, maxGeneration-1);
+			else if (this.child2!=null) return this.child2.search(name, maxGeneration-1);
+			else return null;
+		}
+	}
 }
 
 } // end of class
