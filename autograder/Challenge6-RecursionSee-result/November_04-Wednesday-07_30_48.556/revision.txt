@@ -1,0 +1,11 @@
+Path: work/students/qilezhi2/Challenge6-RecursionSee
+URL: https://subversion.ews.illinois.edu/svn/fa15-cs125/qilezhi2/Challenge6-RecursionSee
+Repository Root: https://subversion.ews.illinois.edu/svn/fa15-cs125
+Repository UUID: 5f23604c-3434-47f8-97b3-c29fac847712
+Revision: 46686
+Node Kind: directory
+Schedule: normal
+Last Changed Author: qilezhi2
+Last Changed Rev: 46021
+Last Changed Date: 2015-11-03 21:11:27 -0600 (Tue, 03 Nov 2015)
+
