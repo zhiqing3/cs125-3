@@ -65,18 +65,32 @@ public int count() // total person count including this object
 	else if (this.child2!=null) return 1+this.child2.count();
 	else return 1;
 }
+
+public int countChildren(int generation) {
+	if (generation==0) return 1;
+	else {
+		if (this.child1!=null && this.child2!=null) 
+			return this.child1.countChildren(generation-1)+this.child2.countChildren(generation-1);
+		else if (this.child1!=null) return this.child1.countChildren(generation-1);
+		else if (this.child2!=null) return this.child2.countChildren(generation-1);
+		else return 0;
+	}
+}
+
 public int countGrandChildren() // but not greatGrandChildren
 {
-	int count=0;
-	if (this.child1!=null) {
-		if (this.child1.child1!=null) count++; 
-		if (this.child1.child2!=null) count++;
-	}
-	if (this.child2!=null) {
-		if (this.child2.child1!=null) count++; 
-		if (this.child2.child2!=null) count++;
-	}
-	return count;
+//	int count=0;
+//	if (this.child1!=null) {
+//		if (this.child1.child1!=null) count++; 
+//		if (this.child1.child2!=null) count++;
+//	}
+//	if (this.child2!=null) {
+//		if (this.child2.child1!=null) count++; 
+//		if (this.child2.child2!=null) count++;
+//	}
+//	return count;
+	
+	return countChildren(2);
 }
 
 public int countMaxGenerations()
