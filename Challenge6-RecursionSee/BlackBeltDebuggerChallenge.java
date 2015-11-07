@@ -2,7 +2,7 @@
 /**
  * This class tests your Debugger Fu. Use Debug As > Unit Test on the Test
  * class. You'll need to set breakpoints and single step through the code.
- * @author replace-with-your-netid-here
+ * @author qilezhi2
  *
  */
 
@@ -16,7 +16,7 @@ public class BlackBeltDebuggerChallenge {
 	 */
 	public static char getTrial0Secret() {
 		// Warning - the value you need here is specific to you
-		return 'H';
+		return 'g';
 	}
 
 	/**
@@ -27,7 +27,7 @@ public class BlackBeltDebuggerChallenge {
 	 */
 	public static char getTrial1Secret() {
 		// Warning - the value you need here is specific to you
-		return 'A';
+		return 'D';
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class BlackBeltDebuggerChallenge {
 	 */
 	public static char getTrial2Secret() {
 		// Warning - the value you need here is specific to you
-		return 'h';
+		return 'O';
 	}
 
 	/**
@@ -48,6 +48,6 @@ public class BlackBeltDebuggerChallenge {
 	 * @return the secret character
 	 */
 	public static char getTrial3Secret() {
-		return 'a';
+		return (char)9;
 	}
 }
