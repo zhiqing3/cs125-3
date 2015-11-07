@@ -55,7 +55,7 @@ public class GeneAnalysisTest extends TestCase
   public void testScore8() {
 	  // Your method should work in the case that a particular
 	  // nucleotide is unknown.
-	  // Treat ? as ajust another character (no special case logic is required)
+	  // Treat ? as just another character (no special case logic is required)
 	  assertEquals(8, GeneAnalysis.score("ACGT???ACGT","ACGTACGT")); 
 
 	  assertEquals(8, GeneAnalysis.score("ACGTACGT","ACGT???????ACGT"));   

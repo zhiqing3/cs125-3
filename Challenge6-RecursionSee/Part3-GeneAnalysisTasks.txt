@@ -64,7 +64,7 @@ S(i, j) = max {		S(i,j-1)
 					S(i-1,j-1)
 					S(i-1,j-1) +1 if Vi = Wj
 
-The base case should be obvious (and the unit tests check that you return the corret value).
+The base case should be obvious (and the unit tests check that you return the correct value).
 
 Your implementation:
 You need to create two methods in the GeneAnalysis class (we've started it for you).
