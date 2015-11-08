@@ -174,30 +174,14 @@ public class LinkedList {
 		}
 	}
 
-	private static String[] hidden = new String[0]; // If the input is less than the first word, the input is "hidden".
 	public LinkedList insert(String word) {
-		if (word.compareToIgnoreCase(this.word)<0) {
-			LinkedList temp = new LinkedList(word, this);
-			// Append the array hidden to the end of the LinkedList
-			for (int j=0; j<hidden.length; j++) {
-				temp.append(hidden[j]); 
+		if (word.compareToIgnoreCase(this.word)<0) return new LinkedList(word, this); // Put the word in the front.
+		else {
+			if (word.compareToIgnoreCase(this.word)>0 && this.next==null) 
+				this.next = new LinkedList(word,null); // Add one LinkedList.
+			else this.next = this.next.insert(word); // Recursion.
 			}
-			return temp;
-		}
-		else if (word.compareToIgnoreCase(this.word)>0) {
-			String[] old = hidden;
-			hidden = new String[old.length+1];
-			// Sort the array.
-			int i=0;
-			for (int j=0; j<old.length; j++) {
-				if (word.compareToIgnoreCase(old[j])>0) i=j+1;
-			}
-			for (int j=0; j<i; j++) hidden[j]=old[j];
-			hidden[i]=word;
-			for (int j=i+1; j<hidden.length; j++) hidden[j]=old[j-1];
-			return this;
-		}
-		else return this;
+		return this;
 	}
 
 }
