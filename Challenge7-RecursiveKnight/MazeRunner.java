@@ -5,6 +5,8 @@ public class MazeRunner {
 
 	/** Initializes the MazeRunner with the x,y values */
 	public MazeRunner(int x, int y) {	
+		this.x=x;
+		this.y=y;
 	}
 
 	public int getX() {
@@ -21,13 +23,17 @@ public class MazeRunner {
 	 * character values other than N,S,E or W are ignored.
 	 */
 	void moveOne(char dir) {
-//		 TODO: Implement moveOne
+		if (dir=='N') y++;
+		if (dir=='S') y--;
+		if (dir=='E') x++;
+		if (dir=='W') x--;
 	}
+	
 	/** Returns true if this maze runner is on the same (x,y) square
 	 * as the parameter. Assumes that the parameter is non-null.
 	 */
 	public boolean caught(MazeRunner other) {
-		return false; // TODO: Implement caught
+		return this.x==other.x && this.y==other.y; 
 	}
 
 	/**
@@ -39,7 +45,12 @@ public class MazeRunner {
 	 * Invoke recursion to test the remaining paths (lo +1)
 	 */
 	static int findShortestString(String[] paths, int lo, int hi) {
-		return -1; // TODO: findShortestString
+		if (lo>=hi) return lo;
+		else {
+			if (paths[lo] != null && 
+					safeStringLength(paths[lo]) < safeStringLength( paths[findShortestString(paths, lo+1, hi)] )) return lo;
+			else return findShortestString(paths, lo+1, hi);
+		}
 	}
 
 	/** Returns the length of the string or Integer.MAX_VALUE
@@ -48,9 +59,9 @@ public class MazeRunner {
 	 * @return
 	 */
 	static int safeStringLength(String s) {
-		return -1;//TODO: safeStringLength
+		if (s==null) return Integer.MAX_VALUE;
+		else return s.length();
 	}
-
 
 	/* Returns a string representation of the shortest path between
 	 * (x,y) and (tx,ty). e.g. a result of "NNEE"
@@ -77,16 +88,24 @@ public class MazeRunner {
 	 */
 	public static String shortestPath(int x, int y, int tX, int tY,
 			boolean blocked[][]) {
-		// TODO: BASE CASES HERE
-		blocked[x][y] = true;
-		//String[] paths = { 
-			//TODO: COLLECT RECURSIVE RESULTS HERE
-		//};
+		// Base cases.
+		if (x<0 || x>blocked.length-1 || y<0|| y>blocked[0].length-1) return null;
+		if (blocked[x][y]) return null;
+		if (x==tX && y==tY) return "";
+		
+		blocked[x][y] = true; // Set the current position to blocked.
+		String[] paths = {shortestPath(x, y+1, tX, tY, blocked), shortestPath(x, y-1, tX, tY, blocked), 
+				shortestPath(x+1, y, tX, tY, blocked), shortestPath(x-1, y, tX, tY, blocked)}; // Collect all paths from the NSEW neighbors
 		blocked[x][y] = false;
-
-		// TODO: Use findShortestString on paths
-		// TODO: Return correct string with Compass direction prepended (or null)
-		return "run away!";
+		
+		if (paths[0]==null && paths[1]==null && paths[2]==null && paths[3]==null) return null;
+		else {
+			int i = findShortestString(paths, 0, 3); // Use findShortestString to determine the shortest path.
+			if (i==0) return "N"+paths[i];
+			if (i==1) return "S"+paths[i];
+			if (i==2) return "E"+paths[i];
+			else return "W"+paths[i];
+		}
 	}
 
 	/** Moves the runner towards the target position, if the
@@ -96,8 +115,10 @@ public class MazeRunner {
 	 * Hint: watch out for the empty string when target = current position...
 	 */
 	public void chase(boolean maze[][], int targetX, int targetY) {
-		// TODO: Implement chase
-		// Use shortestPath, string.charAt,  moveOne
+		String s = shortestPath(this.x, this.y, targetX, targetY, maze);
+		if (s==null);
+		else if (s=="");
+		else this.moveOne(s.charAt(0)); // Move the first step.
 	}
 
 }
