@@ -1,4 +1,7 @@
 //UIUC CS125 FALL 2014 MP. File: MazeRunner.java, CS125 Project: Challenge7-RecursiveKnight, Version: 2015-11-17T19:51:09-0600.209811578
+/**
+ * @author qilezhi2
+ */
 public class MazeRunner {
 
 	private int x, y;
@@ -89,7 +92,7 @@ public class MazeRunner {
 	public static String shortestPath(int x, int y, int tX, int tY,
 			boolean blocked[][]) {
 		// Base cases.
-		if (x<0 || x>blocked.length-1 || y<0|| y>blocked[0].length-1) return null;
+		if (x<0 || x>blocked.length-1 || y<0 || y>blocked[0].length-1) return null;
 		if (blocked[x][y]) return null;
 		if (x==tX && y==tY) return "";
 		
@@ -116,8 +119,8 @@ public class MazeRunner {
 	 */
 	public void chase(boolean maze[][], int targetX, int targetY) {
 		String s = shortestPath(this.x, this.y, targetX, targetY, maze);
-		if (s==null);
-		else if (s=="");
+		if (s==null) return;
+		else if (s=="") return;
 		else this.moveOne(s.charAt(0)); // Move the first step.
 	}
 
