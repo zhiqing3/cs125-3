@@ -76,8 +76,9 @@ public class Workout {
 		// Display result.
 		TextIO.putln("\n--------------------------------");
 		TextIO.putln("New workout has been created!");
-		TextIO.putln(mostRecentWorkout.toString());
-		TextIO.putln("--------------------------------\n");
+		TextIO.put("NEW: "); // Just for alignment.
+		mostRecentWorkout.printWorkout();
+		TextIO.putln("--------------------------------");
 	}
 	
 	
@@ -122,19 +123,38 @@ public class Workout {
 	public void display() {
 		if (this.previous==null);
 		else {
-			TextIO.putln("No." + (count - tempCount + 1) + ". " + this.toString());
+			TextIO.put("No." + (count - tempCount + 1) + " ");
+			this.printWorkout();
 			tempCount--;
 			this.previous.display();
 		}
 	}
 	
-	public String toString() {
-		String s = "Location: " + this.location + ". ";
-		if (this.buddy!="") s += "Buddy: " + this.buddy + ". ";
-		s += "Starting Time: " + this.startingTime + ". ";
-		s += "Duration: " + this.duration + ". ";
-		s += "Rating: " + this.rating + ". ";
-		return s;
+//	public String toString() {
+//		String s = "Location: " + this.location + ". ";
+//		if (this.buddy!="") s += "Buddy: " + this.buddy + ". ";
+//		s += "Starting Time: " + this.startingTime + ". ";
+//		s += "Duration: " + this.duration + ". ";
+//		s += "Rating: " + this.rating + ". ";
+//		return s;
+//	}
+	
+	public void printWorkout() {
+		TextIO.put("[LOCATION] ");
+		TextIO.putf("%33s", this.location); // Just for alignment.
+		TextIO.putf("%5s", "");
+		TextIO.put("[BUDDY] ");
+		TextIO.putf("%18s", this.buddy); // Just for alignment.
+		TextIO.putln();
+		TextIO.putf("%5s", ""); // Just for alignment.
+		TextIO.put("[STARTING TIME] " + this.startingTime);
+		TextIO.putf("%5s", "");
+		TextIO.put("[DURATION] ");
+		TextIO.putf("%15s", this.duration);
+		TextIO.putf("%5s", "");
+		TextIO.put("[RATING] ");
+		TextIO.putf("%2s", this.rating);
+		TextIO.putln();
 	}
 	
 	
