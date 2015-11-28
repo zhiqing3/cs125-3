@@ -159,12 +159,36 @@ public class Workout {
 	
 	
 	/* 
+	 * [OPTION 4]
+	 */
+	public static void displayWorkoutBuddy(String newBuddy) {
+		TextIO.putln("\n--------------------------------");
+		mostRecentWorkout.displayBuddy(newBuddy);
+		TextIO.putln("--------------------------------\n");
+		tempCount = count; // Reset tempCount.
+	}
+	
+	public void displayBuddy(String newBuddy) {
+		if (this.previous==null);
+		else {
+			if (this.buddy.compareTo(newBuddy)==0) {
+				TextIO.put("No." + (count - tempCount + 1) + " ");
+				this.printWorkout();
+			}
+			tempCount--;
+			this.previous.displayBuddy(newBuddy);
+		}
+	}
+	
+	
+	/* 
 	 * [MAIN METHOD]
 	 */
 	public static void main(String[] args) {
 		boolean output = true;
+		TextIO.putln("Welcome to the Workout Logger! Select an option below: \n");
 		while (output) {
-			TextIO.putln("\nWelcome to the Workout Logger! Select an option below: \n");
+			TextIO.putln();
 			TextIO.putln("1) add a workout");
 			TextIO.putln("2) remove a workout");
 			TextIO.putln("3) display all workouts (listing should start with most recent)");
@@ -184,6 +208,12 @@ public class Workout {
 			if (input == 2) remove();
 			if (input == 3) displayWorkouts();
 			
+			if (input == 4) {
+				TextIO.putln("Enter the name of the buddy.");
+				String newBuddy = TextIO.getln();
+				displayWorkoutBuddy(newBuddy);
+			}
+			
 			if (input == 7) {
 				TextIO.putln("Are you sure you want to quit? - all your data will be lost. ");
 				char inputChar = '?'; 
@@ -197,8 +227,8 @@ public class Workout {
 				}
 			}
 			
-		}
+		} // End of while
 		
-	}
+	} // End of main
 	
-}
+} // End of class
