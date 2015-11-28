@@ -5,8 +5,9 @@ import java.util.Date;
 	
 public class Workout {
 
-	private static int count=0;
-	private static int tempCount=0; // Keep track when displaying workouts.
+	private static int count=0; // Count the number of workouts created.
+	private static int tempCount=0; // Keep track when displaying workouts. For option 3 and 4.
+	private static int num=0; // For option 4 and 5.
 	private static Workout mostRecentWorkout = new Workout();
 	
 	
@@ -66,6 +67,13 @@ public class Workout {
 		mostRecentWorkout.duration = end - start; // duration.
 		TextIO.putln("Duration: " + mostRecentWorkout.duration);
 		
+		// Enter milesCovered.
+		while (mostRecentWorkout.milesCovered<=0) {
+			TextIO.putln("Provide the miles covered:");
+			mostRecentWorkout.milesCovered = TextIO.getDouble(); // rating
+		}
+		TextIO.putln("Miles Covered: " + mostRecentWorkout.milesCovered);
+		
 		// Enter a rating.
 		while (mostRecentWorkout.rating<1 || mostRecentWorkout.rating>10) {
 			TextIO.putln("Provide a rating to workout (1: great; 10 poor):");
@@ -92,6 +100,7 @@ public class Workout {
 			TextIO.putln("Select an workout to delete :");
 			input = TextIO.getlnInt();
 		}
+		// Remove the specific workout.
 		if (input==1) mostRecentWorkout = mostRecentWorkout.previous;
 		else {
 			tempCount--;
@@ -140,17 +149,20 @@ public class Workout {
 //	}
 	
 	public void printWorkout() {
-		TextIO.put("[LOCATION] ");
-		TextIO.putf("%33s", this.location); // Just for alignment.
+		TextIO.put("[LOCATION     ] ");
+		TextIO.putf("%28s", this.location); // Just for alignment.
 		TextIO.putf("%5s", "");
-		TextIO.put("[BUDDY] ");
-		TextIO.putf("%18s", this.buddy); // Just for alignment.
+		TextIO.put("[BUDDY   ] ");
+		TextIO.putf("%15s", this.buddy); // Just for alignment.
 		TextIO.putln();
 		TextIO.putf("%5s", ""); // Just for alignment.
 		TextIO.put("[STARTING TIME] " + this.startingTime);
 		TextIO.putf("%5s", "");
 		TextIO.put("[DURATION] ");
 		TextIO.putf("%15s", this.duration);
+		TextIO.putf("%5s", "");
+		TextIO.put("[MILES COVERED] ");
+		TextIO.putf("%15s", this.milesCovered);
 		TextIO.putf("%5s", "");
 		TextIO.put("[RATING] ");
 		TextIO.putf("%2s", this.rating);
@@ -164,19 +176,95 @@ public class Workout {
 	public static void displayWorkoutBuddy(String newBuddy) {
 		TextIO.putln("\n--------------------------------");
 		mostRecentWorkout.displayBuddy(newBuddy);
-		TextIO.putln("--------------------------------\n");
+		if (num==0) TextIO.putln("Sorry. No workouts are found.");
+		TextIO.putln("--------------------------------");
 		tempCount = count; // Reset tempCount.
+		num = 0; // Reset num.
 	}
 	
 	public void displayBuddy(String newBuddy) {
 		if (this.previous==null);
 		else {
-			if (this.buddy.compareTo(newBuddy)==0) {
+			if (this.buddy.compareToIgnoreCase(newBuddy)==0) {
 				TextIO.put("No." + (count - tempCount + 1) + " ");
+				num++; // Count the number of workouts found.
 				this.printWorkout();
 			}
 			tempCount--;
 			this.previous.displayBuddy(newBuddy);
+		}
+	}
+	
+	
+	/*
+	 * [OPTION 5]
+	 */
+	public static void displayWorkoutLocation(String newLocation) {
+		TextIO.putln("\n--------------------------------");
+		for (int i=1; i<11; i++) {
+			mostRecentWorkout.displayLocation(newLocation, i);
+			tempCount = count; // Reset tempCount.
+		}
+		if (num==0) TextIO.putln("Sorry. No workouts are found.");
+		TextIO.putln("--------------------------------");
+		num = 0; // Reset num.
+	}
+	
+	// Find the workout with rating of i. (i ranges from 1 to 10.)
+	public void displayLocation(String newLocation, int i) {
+		if (this.previous==null);
+		else {
+			if (this.location.compareToIgnoreCase(newLocation)==0 && this.rating==i) {
+				TextIO.put("No." + (count - tempCount + 1) + " ");
+				num++; // Count the number of workouts found.
+				this.printWorkout();
+			}
+			tempCount--;
+			this.previous.displayLocation(newLocation, i);
+		}
+	}
+	
+	
+	/*
+	 * [OPTION 6]
+	 */
+	public static void displayPB(double newMilesCovered) {
+		TextIO.putln("\n--------------------------------");
+		long target = mostRecentWorkout.getPB(newMilesCovered);
+		
+		TextIO.putln(num);
+		TextIO.putln(newMilesCovered);
+		TextIO.putln(target);
+		TextIO.putln(mostRecentWorkout.previous==null);
+		
+		if (num==0) TextIO.putln("Sorry. No workouts are found.");
+		else mostRecentWorkout.displayPB(newMilesCovered, target);
+		
+		TextIO.putln("--------------------------------");
+		tempCount = count; // Reset tempCount.
+		num = 0; // Reset num.
+	}
+	
+	public long getPB(double newMilesCovered) {
+		if (this.previous==null) return 0;
+		else {
+			if (this.milesCovered==newMilesCovered) {
+				num++;
+				if (this.duration<this.previous.getPB(newMilesCovered) && this.previous.getPB(newMilesCovered)!=0) return this.duration;
+			}
+			return this.previous.getPB(newMilesCovered);
+		}
+	}
+	
+	public void displayPB(double newMilesCovered, long target) {
+		if (this.previous==null);
+		else {
+			if (this.duration==target && this.milesCovered==newMilesCovered) {
+				TextIO.put("No." + (count - tempCount + 1) + " ");
+				this.printWorkout();
+			}
+			tempCount--;
+			this.previous.displayPB(newMilesCovered, target);
 		}
 	}
 	
@@ -212,6 +300,18 @@ public class Workout {
 				TextIO.putln("Enter the name of the buddy.");
 				String newBuddy = TextIO.getln();
 				displayWorkoutBuddy(newBuddy);
+			}
+			
+			if (input == 5) {
+				TextIO.putln("Enter the name of the location.");
+				String newLocation = TextIO.getln();
+				displayWorkoutLocation(newLocation);
+			}
+			
+			if (input == 6) {
+				TextIO.putln("Enter the distance.");
+				double newMilesCovered = TextIO.getDouble();
+				displayPB(newMilesCovered);
 			}
 			
 			if (input == 7) {
