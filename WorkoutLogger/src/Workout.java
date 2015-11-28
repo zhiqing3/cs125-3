@@ -6,7 +6,7 @@ import java.util.Date;
 public class Workout {
 
 	private static int count=0;
-	private static int countForDisplay=0; // Keep track when displaying workouts.
+	private static int tempCount=0; // Keep track when displaying workouts.
 	private static Workout mostRecentWorkout = new Workout();
 	
 	
@@ -27,7 +27,7 @@ public class Workout {
 		buddy = newBuddy;
 		previous = newPrevious;
 		count++;
-		countForDisplay = count; // Reset countForDisplay.
+		tempCount = count; // Reset tempCount.
 	}
 	
 	
@@ -81,12 +81,30 @@ public class Workout {
 	}
 	
 	
+	/* 
+	 * [OPTION 2]
+	 */
 	public static void remove() {
 		displayWorkouts();
 		int input=0;
 		while (input<1 || input>count) {
 			TextIO.putln("Select an workout to delete :");
 			input = TextIO.getlnInt();
+		}
+		if (input==1) mostRecentWorkout = mostRecentWorkout.previous;
+		else {
+			tempCount--;
+			mostRecentWorkout.removeOne();
+		}
+		tempCount = count; // Reset tempCount.
+		TextIO.putln("The workout has been deleted!");
+	}
+	
+	public void removeOne() {
+		if (tempCount==1) this.previous = this.previous.previous;
+		else {
+			tempCount--;
+			this.previous.removeOne();
 		}
 	}
 	
@@ -98,14 +116,14 @@ public class Workout {
 		TextIO.putln("\n--------------------------------");
 		mostRecentWorkout.display();
 		TextIO.putln("--------------------------------\n");
-		countForDisplay = count; // Reset num.
+		tempCount = count; // Reset tempCount.
 	}
 	
 	public void display() {
 		if (this.previous==null);
 		else {
-			TextIO.putln("No." + (count - countForDisplay + 1) + ". " + this.toString());
-			countForDisplay--;
+			TextIO.putln("No." + (count - tempCount + 1) + ". " + this.toString());
+			tempCount--;
 			this.previous.display();
 		}
 	}
@@ -126,8 +144,7 @@ public class Workout {
 	public static void main(String[] args) {
 		boolean output = true;
 		while (output) {
-			TextIO.putln("\n--------------------------------");
-			TextIO.putln("Welcome to the Workout Logger! Select an option below: \n");
+			TextIO.putln("\nWelcome to the Workout Logger! Select an option below: \n");
 			TextIO.putln("1) add a workout");
 			TextIO.putln("2) remove a workout");
 			TextIO.putln("3) display all workouts (listing should start with most recent)");
