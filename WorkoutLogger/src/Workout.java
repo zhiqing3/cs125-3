@@ -130,7 +130,7 @@ public class Workout {
 	}
 	
 	public void display() {
-		if (this.previous==null);
+		if (this.previous==null); // Base case: the "previous" of the first workout.
 		else {
 			TextIO.put("No." + (count - tempCount + 1) + " ");
 			this.printWorkout();
@@ -183,7 +183,7 @@ public class Workout {
 	}
 	
 	public void displayBuddy(String newBuddy) {
-		if (this.previous==null);
+		if (this.previous==null); // Base case: the "previous" of the first workout.
 		else {
 			if (this.buddy.compareToIgnoreCase(newBuddy)==0) {
 				TextIO.put("No." + (count - tempCount + 1) + " ");
@@ -212,7 +212,7 @@ public class Workout {
 	
 	// Find the workout with rating of i. (i ranges from 1 to 10.)
 	public void displayLocation(String newLocation, int i) {
-		if (this.previous==null);
+		if (this.previous==null); // Base case: the "previous" of the first workout.
 		else {
 			if (this.location.compareToIgnoreCase(newLocation)==0 && this.rating==i) {
 				TextIO.put("No." + (count - tempCount + 1) + " ");
@@ -230,34 +230,30 @@ public class Workout {
 	 */
 	public static void displayPB(double newMilesCovered) {
 		TextIO.putln("\n--------------------------------");
-		long target = mostRecentWorkout.getPB(newMilesCovered);
-		
-		TextIO.putln(num);
-		TextIO.putln(newMilesCovered);
-		TextIO.putln(target);
-		TextIO.putln(mostRecentWorkout.previous==null);
-		
+		long target = mostRecentWorkout.getPB(newMilesCovered); // Get the PB.
 		if (num==0) TextIO.putln("Sorry. No workouts are found.");
-		else mostRecentWorkout.displayPB(newMilesCovered, target);
-		
+		else mostRecentWorkout.displayPB(newMilesCovered, target); // Display all workout with that duration.
 		TextIO.putln("--------------------------------");
 		tempCount = count; // Reset tempCount.
 		num = 0; // Reset num.
 	}
 	
 	public long getPB(double newMilesCovered) {
-		if (this.previous==null) return 0;
+		if (this.previous.previous==null) { // Base case: the first workout.
+			if (this.milesCovered==newMilesCovered) return this.duration;
+			else return -1;
+		}
 		else {
 			if (this.milesCovered==newMilesCovered) {
-				num++;
-				if (this.duration<this.previous.getPB(newMilesCovered) && this.previous.getPB(newMilesCovered)!=0) return this.duration;
+				num++; // // Count the number of workouts found.
+				if (this.duration<this.previous.getPB(newMilesCovered)) return this.duration;
 			}
 			return this.previous.getPB(newMilesCovered);
 		}
 	}
 	
 	public void displayPB(double newMilesCovered, long target) {
-		if (this.previous==null);
+		if (this.previous==null); // Base case: the "previous" of the first workout.
 		else {
 			if (this.duration==target && this.milesCovered==newMilesCovered) {
 				TextIO.put("No." + (count - tempCount + 1) + " ");
