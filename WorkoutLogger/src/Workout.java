@@ -101,7 +101,8 @@ public class Workout {
 			input = TextIO.getlnInt();
 		}
 		// Remove the specific workout.
-		if (input==1) mostRecentWorkout = mostRecentWorkout.previous;
+		tempCount=input;
+		if (tempCount==1) mostRecentWorkout = mostRecentWorkout.previous;
 		else {
 			tempCount--;
 			mostRecentWorkout.removeOne();
@@ -279,7 +280,7 @@ public class Workout {
 			TextIO.putln("4) display all workouts with buddy");
 			TextIO.putln("5) display workouts for a certain location"); 
 			TextIO.putln("(listing should be ordered by rating - best rated workout to lowest rated workout)");
-			TextIO.putln("6) PB: display personal best time for a prompted location");
+			TextIO.putln("6) PB: display personal best time for a prompted miles covered");
 			TextIO.putln("7) quit\n");
 			
 			int input=0;
