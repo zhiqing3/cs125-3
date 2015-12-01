@@ -1,0 +1,11 @@
+Path: work/students/qilezhi2/Challenge7-RecursiveKnight
+URL: https://subversion.ews.illinois.edu/svn/fa15-cs125/qilezhi2/Challenge7-RecursiveKnight
+Repository Root: https://subversion.ews.illinois.edu/svn/fa15-cs125
+Repository UUID: 5f23604c-3434-47f8-97b3-c29fac847712
+Revision: 56560
+Node Kind: directory
+Schedule: normal
+Last Changed Author: qilezhi2
+Last Changed Rev: 53578
+Last Changed Date: 2015-11-22 23:26:45 -0600 (Sun, 22 Nov 2015)
+
