@@ -241,7 +241,10 @@ public class Workout {
 	
 	public long getPB(double newMilesCovered) {
 		if (this.previous.previous==null) { // Base case: the first workout.
-			if (this.milesCovered==newMilesCovered) return this.duration;
+			if (this.milesCovered==newMilesCovered) {
+				num++; 
+				return this.duration;
+			}
 			else return -1;
 		}
 		else {
@@ -264,68 +267,5 @@ public class Workout {
 			this.previous.displayPB(newMilesCovered, target);
 		}
 	}
-	
-	
-	/* 
-	 * [MAIN METHOD]
-	 */
-	public static void main(String[] args) {
-		boolean output = true;
-		TextIO.putln("Welcome to the Workout Logger! Select an option below: \n");
-		while (output) {
-			TextIO.putln();
-			TextIO.putln("1) add a workout");
-			TextIO.putln("2) remove a workout");
-			TextIO.putln("3) display all workouts (listing should start with most recent)");
-			TextIO.putln("4) display all workouts with buddy");
-			TextIO.putln("5) display workouts for a certain location"); 
-			TextIO.putln("(listing should be ordered by rating - best rated workout to lowest rated workout)");
-			TextIO.putln("6) PB: display personal best time for a prompted miles covered");
-			TextIO.putln("7) quit\n");
-			
-			int input=0;
-			while (input<1 || input>7) {
-				TextIO.putln("Select an option above:");
-				input = TextIO.getlnInt();
-			}
-			
-			if (input == 1) add(); 
-			if (input == 2) remove();
-			if (input == 3) displayWorkouts();
-			
-			if (input == 4) {
-				TextIO.putln("Enter the name of the buddy.");
-				String newBuddy = TextIO.getln();
-				displayWorkoutBuddy(newBuddy);
-			}
-			
-			if (input == 5) {
-				TextIO.putln("Enter the name of the location.");
-				String newLocation = TextIO.getln();
-				displayWorkoutLocation(newLocation);
-			}
-			
-			if (input == 6) {
-				TextIO.putln("Enter the distance.");
-				double newMilesCovered = TextIO.getDouble();
-				displayPB(newMilesCovered);
-			}
-			
-			if (input == 7) {
-				TextIO.putln("Are you sure you want to quit? - all your data will be lost. ");
-				char inputChar = '?'; 
-				while (inputChar != 'Y' && inputChar != 'N') {
-					TextIO.putln("Y) Quit. N) Back");
-					inputChar = TextIO.getlnChar(); 
-				}	
-				if (inputChar == 'Y') {
-					TextIO.putln("Bye!");
-					output = false;
-				}
-			}
-			
-		} // End of while
-		
-	} // End of main
 	
 } // End of class
