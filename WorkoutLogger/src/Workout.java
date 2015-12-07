@@ -10,6 +10,7 @@ public class Workout {
 	private static int num=0; // For option 4 and 5.
 	private static Workout mostRecentWorkout = new Workout();
 	
+	public static Workout getMostRecentWorkoutPrevious() {return mostRecentWorkout.previous;}
 	
 	// Instance variables.
 	private String location;

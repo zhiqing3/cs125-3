@@ -2,9 +2,13 @@
 public class UserInterfaceLogger {
 	
 	public static void main(String[] args) {
+		
 		boolean output = true;
+		
 		TextIO.putln("Welcome to the Workout Logger! Select an option below:");
+		
 		while (output) {
+			
 			TextIO.putln();
 			TextIO.putln("1) add a workout");
 			TextIO.putln("2) remove a workout");
@@ -17,6 +21,12 @@ public class UserInterfaceLogger {
 			
 			int input=0;
 			while (input<1 || input>7) {
+				TextIO.putln("Select an option above:");
+				input = TextIO.getlnInt();
+			}
+			// If no workout exists..
+			while (Workout.getMostRecentWorkoutPrevious()==null && input!=1 && input!=7) {
+				TextIO.putln("No workouts exist. Please add a new workout or quit.");
 				TextIO.putln("Select an option above:");
 				input = TextIO.getlnInt();
 			}
@@ -46,11 +56,11 @@ public class UserInterfaceLogger {
 			if (input == 7) {
 				TextIO.putln("Are you sure you want to quit? - all your data will be lost. ");
 				char inputChar = '?'; 
-				while (inputChar != 'Y' && inputChar != 'N') {
+				while (inputChar != 'Y' && inputChar != 'N' && inputChar != 'y' && inputChar != 'n') {
 					TextIO.putln("Y) Quit. N) Back");
 					inputChar = TextIO.getlnChar(); 
 				}	
-				if (inputChar == 'Y') {
+				if (inputChar == 'Y' || inputChar == 'y') {
 					TextIO.putln("Bye!");
 					output = false;
 				}
